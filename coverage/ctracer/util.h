@@ -75,4 +75,17 @@ typedef unsigned long long uint64;
 /* Only for extreme machete-mode debugging! */
 #define CRASH       { printf("*** CRASH! ***\n"); *((int*)1) = 1; }
 
+static inline int
+atomic_load_int(int *ptr)
+{
+    return __atomic_load_n(ptr, __ATOMIC_SEQ_CST);
+}
+
+static inline void
+atomic_store_int(int *ptr, int value)
+{
+    __atomic_store_n(ptr, value, __ATOMIC_SEQ_CST);
+}
+
+
 #endif /* _COVERAGE_UTIL_H */
